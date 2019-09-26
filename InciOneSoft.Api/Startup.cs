@@ -41,6 +41,7 @@ namespace InciOneSoft.Api
             services.AddTransient<IServiceBase, ServiceBase>();
             services.AddTransient<IAutoMapperService, AutoMapperService>();
             services.AddTransient<IPersonService, PersonService>();
+            services.AddTransient<IFileService, FileService>();
 
             services.AddLogging();
         }

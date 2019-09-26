@@ -13,14 +13,14 @@ namespace InciOneSoft.DAL.Entities
         public Guid Id { get; set; }
 
         [Required]
-        [MaxLength(FIRST_NAME_CHAR_LEN)]
+        [MaxLength(FILEINFO_LEN)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(LAST_NAME_CHAR_LEN)]
+        [MaxLength(FILEINFO_LEN)]
         public string LastName { get; set; }
 
-        [MaxLength(LAST_NAME_CHAR_LEN)]
+        [MaxLength(ADDRESS_CHAR_LEN)]
         public string Address { get; set; }
     }
 }

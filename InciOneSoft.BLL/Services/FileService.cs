@@ -10,6 +10,8 @@ using System.Threading;
 using System.Linq;
 using System.Threading.Tasks;
 using InciOneSoft.BLL.Helpers;
+using Microsoft.VisualBasic.FileIO;
+using System.IO;
 
 namespace InciOneSoft.BLL.Services
 {
@@ -19,12 +21,23 @@ namespace InciOneSoft.BLL.Services
         {
         }
 
-        public async Task<bool> UploadFileAsync(CancellationToken ct)
+        public async Task<bool> UploadFileAsync(byte[] fileBytesArray, CancellationToken ct)
         {
+            using (TextFieldParser parser = new TextFieldParser(new MemoryStream(fileBytesArray)))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(",");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        //TODO: Process field
+                    }
+                }
+            }
+
             return false;
-            //IEnumerable<Person> personsEntity = await _uow.Persons.GetPersonsAsync(ct);
-            //IEnumerable<PersonDto> personsDto= _mapper.Mapper.Map<IEnumerable<PersonDto>>(personsEntity);
-            //return personsDto.ToList();
         }
     }
 }

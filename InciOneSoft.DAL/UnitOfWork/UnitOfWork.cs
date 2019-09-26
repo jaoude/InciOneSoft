@@ -19,11 +19,6 @@ namespace InciOneSoft.DAL.UnitOfWork
             _serviceProvider = serviceProvider;
         }
 
-        public ICatalogRepository Catalogs => _serviceProvider.GetService<ICatalogRepository>();
-        public IUniversityRepository Universities => _serviceProvider.GetService<IUniversityRepository>();
-        public ICourseRepository Courses => _serviceProvider.GetService<ICourseRepository>();
-        public IInstitutionRepository Institutions => _serviceProvider.GetService<IInstitutionRepository>();
-        public IProgrammRepository Programms => _serviceProvider.GetService<IProgrammRepository>();
         public IPersonRepository Persons => _serviceProvider.GetService<IPersonRepository>();
 
         public async Task<int> SaveChangesAsync(CancellationToken ct)

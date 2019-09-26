@@ -48,30 +48,20 @@ namespace InciOneSoft.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Catalog",
+                name: "FileInfo",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    SchoolYear = table.Column<int>(nullable: false),
-                    PEOs = table.Column<string>(nullable: false)
+                    Export = table.Column<string>(maxLength: 100, nullable: true),
+                    Version = table.Column<string>(maxLength: 100, nullable: true),
+                    FactureNonSoldees = table.Column<string>(maxLength: 100, nullable: true),
+                    FileDate = table.Column<DateTime>(nullable: false),
+                    UploadedDate = table.Column<DateTime>(nullable: false),
+                    UploadedBy = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Catalog", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Course",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Credits = table.Column<float>(nullable: false),
-                    Code = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Course", x => x.Id);
+                    table.PrimaryKey("PK_FileInfo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,65 +69,13 @@ namespace InciOneSoft.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    Address = table.Column<string>(maxLength: 50, nullable: true)
+                    FirstName = table.Column<string>(maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(maxLength: 100, nullable: false),
+                    Address = table.Column<string>(maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Person", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Porgramm",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Code = table.Column<string>(maxLength: 100, nullable: false),
-                    Description = table.Column<string>(nullable: false),
-                    NumberOfCredits = table.Column<int>(nullable: false),
-                    NumberOfSemesters = table.Column<int>(nullable: false),
-                    Diploma = table.Column<string>(maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Porgramm", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "University",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 500, nullable: false),
-                    Address = table.Column<string>(maxLength: 500, nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    InstitutionId = table.Column<Guid>(nullable: true),
-                    UniversityId = table.Column<Guid>(nullable: true),
-                    FacultyId = table.Column<Guid>(nullable: true),
-                    EvaluationType = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_University", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_University_University_InstitutionId",
-                        column: x => x.InstitutionId,
-                        principalTable: "University",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_University_University_UniversityId",
-                        column: x => x.UniversityId,
-                        principalTable: "University",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_University_University_FacultyId",
-                        column: x => x.FacultyId,
-                        principalTable: "University",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,32 +187,17 @@ namespace InciOneSoft.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Person",
                 columns: new[] { "Id", "Address", "FirstName", "LastName" },
-                values: new object[] { new Guid("f4bff7c7-025f-4c8e-ac49-e9ec7ce94736"), null, "Sassine", "Abou-Jaoude" });
+                values: new object[] { new Guid("094ed035-6cc1-481f-96ba-33e7316c9f9c"), null, "Sassine", "Abou-Jaoude" });
 
             migrationBuilder.InsertData(
                 table: "Person",
                 columns: new[] { "Id", "Address", "FirstName", "LastName" },
-                values: new object[] { new Guid("5b34aed3-2fba-4a32-9b1e-793b2de97f80"), null, "George", "Younes" });
+                values: new object[] { new Guid("89569b01-9b2f-45fa-9403-1d5798e8c233"), null, "Anthony", "Khalife" });
 
             migrationBuilder.InsertData(
-                table: "University",
-                columns: new[] { "Id", "Address", "Discriminator", "Name" },
-                values: new object[] { new Guid("252f1ecc-cfc5-41eb-95a3-b6d119c077f6"), "Beirut, Lebanon", "University", "Université Saint Joseph" });
-
-            migrationBuilder.InsertData(
-                table: "University",
-                columns: new[] { "Id", "Address", "Discriminator", "Name", "UniversityId" },
-                values: new object[] { new Guid("a7fa09ae-08e4-43f0-9dba-81a7f0036014"), "Mar Roukoz, Lebanon", "Faculty", "Engineering", new Guid("252f1ecc-cfc5-41eb-95a3-b6d119c077f6") });
-
-            migrationBuilder.InsertData(
-                table: "University",
-                columns: new[] { "Id", "Address", "Discriminator", "Name", "EvaluationType", "FacultyId" },
-                values: new object[] { new Guid("bef6892c-7859-4de4-b27a-94ee939421f4"), "Mar Roukoz, Lebanon", "Institution", "ESIB", 0, new Guid("a7fa09ae-08e4-43f0-9dba-81a7f0036014") });
-
-            migrationBuilder.InsertData(
-                table: "University",
-                columns: new[] { "Id", "Address", "Discriminator", "Name", "EvaluationType", "FacultyId" },
-                values: new object[] { new Guid("e34fa5fb-c76e-4914-8cf4-995d442aa83b"), "Mar Roukoz, Lebanon", "Institution", "INCI", 0, new Guid("a7fa09ae-08e4-43f0-9dba-81a7f0036014") });
+                table: "Person",
+                columns: new[] { "Id", "Address", "FirstName", "LastName" },
+                values: new object[] { new Guid("ba5a4002-e30a-494c-95bf-9559b9b25dc8"), null, "Marc", "Abou Rjeili" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -314,21 +237,6 @@ namespace InciOneSoft.DAL.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_University_InstitutionId",
-                table: "University",
-                column: "InstitutionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_University_UniversityId",
-                table: "University",
-                column: "UniversityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_University_FacultyId",
-                table: "University",
-                column: "FacultyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -349,19 +257,10 @@ namespace InciOneSoft.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Catalog");
-
-            migrationBuilder.DropTable(
-                name: "Course");
+                name: "FileInfo");
 
             migrationBuilder.DropTable(
                 name: "Person");
-
-            migrationBuilder.DropTable(
-                name: "Porgramm");
-
-            migrationBuilder.DropTable(
-                name: "University");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

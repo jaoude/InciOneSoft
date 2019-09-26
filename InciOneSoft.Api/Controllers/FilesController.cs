@@ -11,6 +11,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using InciOneSoft.BLL.Dtos.Request;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace InciOneSoft.Api.Controllers
 {
@@ -27,35 +30,17 @@ namespace InciOneSoft.Api.Controllers
         }
 
         [HttpPost("UploadFile")]
-        public async Task<IActionResult> Post([FromBody] UploadFileDto file)
+        public async Task<IActionResult> Post(IFormFile file, CancellationToken ct)
         {
-            //long size = files.Sum(f => f.Length);
-
-            //// full path to file in temp location
-            //var filePath = Path.GetTempFileName();
-
-            //foreach (var formFile in files)
-            //{
-            //    if (formFile.Length > 0)
-            //    {
-            //        using (var stream = new FileStream(filePath, FileMode.Create))
-            //        {
-            //            await formFile.CopyToAsync(stream);
-            //        }
-            //    }
-            //}
-            return Ok();
-            // process uploaded files
-            // Don't rely on or trust the FileName property without validation.
-
-        //    return Ok(new { count = files.Count, size, filePath });
-        }
-        [HttpPost]
-        public async Task<IActionResult> Upload(CancellationToken ct)
-        {
-            _logger.LogInformation("called GetPersons");
-            var personsDto = await _fileService.UploadFileAsync(ct);
-            return Ok();
+            var fileMemoryStream = new MemoryStream();
+            byte[] fileBytesArray = null;
+            using (fileMemoryStream)
+            {
+                file.CopyTo(fileMemoryStream);
+                fileBytesArray = fileMemoryStream.ToArray();
+            }
+            await _fileService.UploadFileAsync(fileBytesArray, ct);
+            return Ok(new { count = 1, file.Length });
         }
     }
 }

@@ -8,6 +8,6 @@ namespace InciOneSoft.BLL.Services
 {
     public interface IFileService : IServiceBase
     {
-        Task<bool> UploadFileAsync(CancellationToken ct);
+        Task<bool> UploadFileAsync(byte[] fileBytesArray, CancellationToken ct);
     }
 }
