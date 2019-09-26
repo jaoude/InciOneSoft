@@ -34,7 +34,7 @@ namespace InciOneSoft.Api
             ));
             // services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<InciOneSoftDbContext>();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<InciOneSoftDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -68,6 +68,8 @@ namespace InciOneSoft.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
