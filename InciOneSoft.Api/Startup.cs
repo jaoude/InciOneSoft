@@ -32,17 +32,24 @@ namespace InciOneSoft.Api
             services.AddDbContextPool<InciOneSoftDbContext>(
                 option => option.UseSqlServer(Configuration.GetConnectionString("InciOneSoftConnectionString")
             ));
-            services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<InciOneSoftDbContext>();
+            // services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<InciOneSoftDbContext>();
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<InciOneSoftDbContext>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPersonRepository, PersonRepository>();
 
             services.AddTransient<IServiceBase, ServiceBase>();
+            services.AddTransient<IServiceBase, ServiceBase>();
+            services.AddTransient<IServiceBase, ServiceBase>();
+            services.AddTransient<IServiceBase, ServiceBase>();
             services.AddTransient<IAutoMapperService, AutoMapperService>();
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IFileService, FileService>();
-
+            services.AddRazorPages();
             services.AddLogging();
         }
 
@@ -62,7 +69,14 @@ namespace InciOneSoft.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseEndpoints( endpoints => { endpoints.MapControllers(); });
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints( endpoints =>
+            { 
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+            });
 
             //NLog
             loggerFactory.AddNLog();
