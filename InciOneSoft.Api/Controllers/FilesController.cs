@@ -14,6 +14,8 @@ using InciOneSoft.BLL.Dtos.Request;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Text;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace InciOneSoft.Api.Controllers
 {
@@ -30,16 +32,22 @@ namespace InciOneSoft.Api.Controllers
         }
 
         [HttpPost("UploadFile")]
-        public async Task<IActionResult> Post(IFormFile file, CancellationToken ct)
+        public async Task<IActionResult> Post(IFormFile file, [FromForm]string fileInfoText, CancellationToken ct)
         {
-            var fileMemoryStream = new MemoryStream();
             byte[] fileBytesArray = null;
-            using (fileMemoryStream)
+            
+            using (var fileMemoryStream = new MemoryStream())
             {
                 file.CopyTo(fileMemoryStream);
                 fileBytesArray = fileMemoryStream.ToArray();
             }
-            await _fileService.UploadFileAsync(fileBytesArray, ct);
+            
+            await _fileService.UploadFileAsync (
+                JsonConvert.DeserializeObject<FileInfoDto>(fileInfoText), 
+                fileBytesArray, 
+                User?.Identity?.Name, 
+                ct);
+            
             return Ok(new { count = 1, file.Length });
         }
     }

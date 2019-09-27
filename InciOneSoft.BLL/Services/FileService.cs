@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using InciOneSoft.BLL.Helpers;
 using Microsoft.VisualBasic.FileIO;
 using System.IO;
+using InciOneSoft.BLL.Dtos.Request;
+using FileInfo = InciOneSoft.DAL.Entities.FileInfo;
 
 namespace InciOneSoft.BLL.Services
 {
@@ -21,8 +23,12 @@ namespace InciOneSoft.BLL.Services
         {
         }
 
-        public async Task<bool> UploadFileAsync(byte[] fileBytesArray, CancellationToken ct)
+        public async Task<bool> UploadFileAsync(FileInfoDto fileInfoDto, byte[] fileBytesArray, string userName, CancellationToken ct)
         {
+            FileInfo fileInfoEnity = _mapper.Mapper.Map<FileInfo>(fileInfoDto);
+
+            _uow.FileInfos.Add(fileInfoEnity);
+
             using (TextFieldParser parser = new TextFieldParser(new MemoryStream(fileBytesArray)))
             {
                 parser.TextFieldType = FieldType.Delimited;
@@ -32,11 +38,11 @@ namespace InciOneSoft.BLL.Services
                     string[] fields = parser.ReadFields();
                     foreach (string field in fields)
                     {
-                        //TODO: Process field
+
                     }
                 }
             }
-
+            // 422 Unprocessable Entity
             return false;
         }
     }

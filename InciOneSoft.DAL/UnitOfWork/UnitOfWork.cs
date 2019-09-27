@@ -20,6 +20,7 @@ namespace InciOneSoft.DAL.UnitOfWork
         }
 
         public IPersonRepository Persons => _serviceProvider.GetService<IPersonRepository>();
+        public IFileInfoRepository FileInfos => _serviceProvider.GetService<IFileInfoRepository>();
 
         public async Task<int> SaveChangesAsync(CancellationToken ct)
         {

@@ -8,7 +8,7 @@ namespace InciOneSoft.DAL.UnitOfWork
     public interface IUnitOfWork : IDisposable
     {
         IPersonRepository Persons { get; }
-
+        IFileInfoRepository FileInfos { get; }
         Task<int> SaveChangesAsync(CancellationToken ct);
 
         int SaveChanges();

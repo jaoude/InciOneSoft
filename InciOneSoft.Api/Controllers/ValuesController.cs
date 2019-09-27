@@ -13,10 +13,13 @@ namespace InciOneSoft.Api.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize]
+      //  [Authorize]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+
+            var userName = User?.Identity?.Name;
+
+            return new string[] { "value1", "value2", userName };
         }
 
         // GET api/values/5

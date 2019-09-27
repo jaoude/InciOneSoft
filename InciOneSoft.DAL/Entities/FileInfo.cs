@@ -23,10 +23,10 @@ namespace InciOneSoft.DAL.Entities
         public string FactureNonSoldees { get; set; }
        
        
-        public DateTime FileDate { get; set; }
+        public DateTime FileDateHour { get; set; }
 
         public DateTime UploadedDate { get; set; }
 
-        public Guid UploadedBy { get; set; }
+        public string UploadedByUserName { get; set; }
     }
 }

@@ -41,6 +41,7 @@ namespace InciOneSoft.Api
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IFileInfoRepository, FileInfoRepository>();
 
             services.AddTransient<IServiceBase, ServiceBase>();
             services.AddTransient<IServiceBase, ServiceBase>();

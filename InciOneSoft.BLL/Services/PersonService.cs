@@ -22,7 +22,7 @@ namespace InciOneSoft.BLL.Services
         public async Task<IEnumerable<PersonDto>> GetPersonsAsync(CancellationToken ct)
         {
             IEnumerable<Person> personsEntity = await _uow.Persons.GetPersonsAsync(ct);
-            IEnumerable<PersonDto> personsDto= _mapper.Mapper.Map<IEnumerable<PersonDto>>(personsEntity);
+            IEnumerable<PersonDto> personsDto = _mapper.Mapper.Map<IEnumerable<PersonDto>>(personsEntity);
             return personsDto.ToList();
         }
 
