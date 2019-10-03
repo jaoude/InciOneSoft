@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InciOneSoft.DAL.Migrations
 {
-    public partial class Initial_Setup : Migration
+    public partial class Initial_Setup2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,9 +55,9 @@ namespace InciOneSoft.DAL.Migrations
                     Export = table.Column<string>(maxLength: 100, nullable: true),
                     Version = table.Column<string>(maxLength: 100, nullable: true),
                     FactureNonSoldees = table.Column<string>(maxLength: 100, nullable: true),
-                    FileDate = table.Column<DateTime>(nullable: false),
+                    FileDateHour = table.Column<DateTime>(nullable: false),
                     UploadedDate = table.Column<DateTime>(nullable: false),
-                    UploadedBy = table.Column<Guid>(nullable: false)
+                    UploadedByUserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -124,8 +124,8 @@ namespace InciOneSoft.DAL.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -169,8 +169,8 @@ namespace InciOneSoft.DAL.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
+                    Name = table.Column<string>(maxLength: 128, nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -187,17 +187,17 @@ namespace InciOneSoft.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Person",
                 columns: new[] { "Id", "Address", "FirstName", "LastName" },
-                values: new object[] { new Guid("094ed035-6cc1-481f-96ba-33e7316c9f9c"), null, "Sassine", "Abou-Jaoude" });
+                values: new object[] { new Guid("453717d5-d178-465d-b91b-918984cb2791"), null, "Sassine", "Abou-Jaoude" });
 
             migrationBuilder.InsertData(
                 table: "Person",
                 columns: new[] { "Id", "Address", "FirstName", "LastName" },
-                values: new object[] { new Guid("89569b01-9b2f-45fa-9403-1d5798e8c233"), null, "Anthony", "Khalife" });
+                values: new object[] { new Guid("96ff847e-4dfa-44df-b6eb-2bf31177dfa2"), null, "Anthony", "Khalife" });
 
             migrationBuilder.InsertData(
                 table: "Person",
                 columns: new[] { "Id", "Address", "FirstName", "LastName" },
-                values: new object[] { new Guid("ba5a4002-e30a-494c-95bf-9559b9b25dc8"), null, "Marc", "Abou Rjeili" });
+                values: new object[] { new Guid("87fc4b01-eb32-4eab-886e-211f51be2d95"), null, "Marc", "Abou Rjeili" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

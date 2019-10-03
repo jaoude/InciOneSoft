@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InciOneSoft.DAL.Migrations
 {
     [DbContext(typeof(InciOneSoftDbContext))]
-    [Migration("20190926145455_Initial_Setup")]
-    partial class Initial_Setup
+    [Migration("20191003143150_Initial_Setup2")]
+    partial class Initial_Setup2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,9 @@ namespace InciOneSoft.DAL.Migrations
                     b.Property<string>("FactureNonSoldees")
                         .HasMaxLength(100);
 
-                    b.Property<DateTime>("FileDate");
+                    b.Property<DateTime>("FileDateHour");
 
-                    b.Property<Guid>("UploadedBy");
+                    b.Property<string>("UploadedByUserName");
 
                     b.Property<DateTime>("UploadedDate");
 
@@ -69,19 +69,19 @@ namespace InciOneSoft.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("094ed035-6cc1-481f-96ba-33e7316c9f9c"),
+                            Id = new Guid("453717d5-d178-465d-b91b-918984cb2791"),
                             FirstName = "Sassine",
                             LastName = "Abou-Jaoude"
                         },
                         new
                         {
-                            Id = new Guid("89569b01-9b2f-45fa-9403-1d5798e8c233"),
+                            Id = new Guid("96ff847e-4dfa-44df-b6eb-2bf31177dfa2"),
                             FirstName = "Anthony",
                             LastName = "Khalife"
                         },
                         new
                         {
-                            Id = new Guid("ba5a4002-e30a-494c-95bf-9559b9b25dc8"),
+                            Id = new Guid("87fc4b01-eb32-4eab-886e-211f51be2d95"),
                             FirstName = "Marc",
                             LastName = "Abou Rjeili"
                         });
@@ -204,9 +204,11 @@ namespace InciOneSoft.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("ProviderKey");
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -237,9 +239,11 @@ namespace InciOneSoft.DAL.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider");
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value");
 

@@ -12,7 +12,7 @@ namespace InciOneSoft.DAL.DBContext
     {
         public DbSet<Person> Persons { get; set; }
         public DbSet<FileInfo> FileInfos { get; set; }
-
+        public DbSet<FileData> FileDatas { get; set; }
 
 
         public InciOneSoftDbContext(DbContextOptions<InciOneSoftDbContext> options) : base(options)
