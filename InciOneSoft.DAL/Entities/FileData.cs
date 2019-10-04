@@ -14,7 +14,7 @@ namespace InciOneSoft.DAL.Entities
         public Guid Id { get; set; }
 
         [ForeignKey("FileInfoId")]
-        public int FileInfoId { get; set; }
+        public Guid FileInfoId { get; set; }
 
         public FileInfo FileInfo { get; set; }
         public string ClientPayeur { get; set; }

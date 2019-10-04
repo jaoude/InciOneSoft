@@ -21,7 +21,7 @@ namespace InciOneSoft.DAL.UnitOfWork
 
         public IPersonRepository Persons => _serviceProvider.GetService<IPersonRepository>();
         public IFileInfoRepository FileInfos => _serviceProvider.GetService<IFileInfoRepository>();
-
+        public IFileDataRepository FileDatas => _serviceProvider.GetService<IFileDataRepository>();
         public async Task<int> SaveChangesAsync(CancellationToken ct)
         {
             return await _db.SaveChangesAsync(ct);

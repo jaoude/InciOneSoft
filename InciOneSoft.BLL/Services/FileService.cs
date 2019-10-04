@@ -26,22 +26,10 @@ namespace InciOneSoft.BLL.Services
         public async Task<bool> UploadFileAsync(FileInfoDto fileInfoDto, byte[] fileBytesArray, string userName, CancellationToken ct)
         {
             FileInfo fileInfoEnity = _mapper.Mapper.Map<FileInfo>(fileInfoDto);
-
+            
             _uow.FileInfos.Add(fileInfoEnity);
+            //await _uow.FileInfos.UploadAsync(fileBytesArray, fileInfoEnity.Id, userName, ct);
 
-            using (TextFieldParser parser = new TextFieldParser(new MemoryStream(fileBytesArray)))
-            {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
-                while (!parser.EndOfData)
-                {
-                    string[] fields = parser.ReadFields();
-                    foreach (string field in fields)
-                    {
-
-                    }
-                }
-            }
             // 422 Unprocessable Entity
             return false;
         }

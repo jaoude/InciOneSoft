@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace InciOneSoft.DAL.Repositories
 {
-    public interface IFileInfoRepository : IRepository<FileInfo>
+    public interface IFileDataRepository : IRepository<FileData>
     {
-        //Task UploadAsync(byte[] fileBytesArray, Guid fileInfoId, string userName, CancellationToken ct);
         //Task<IEnumerable<Person>> GetPersonsAsync(CancellationToken ct);
         //Task<Person> GetPersonAsync(Guid id, CancellationToken ct);
 

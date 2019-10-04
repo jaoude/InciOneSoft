@@ -9,6 +9,7 @@ namespace InciOneSoft.DAL.UnitOfWork
     {
         IPersonRepository Persons { get; }
         IFileInfoRepository FileInfos { get; }
+        IFileDataRepository FileDatas { get; }
         Task<int> SaveChangesAsync(CancellationToken ct);
 
         int SaveChanges();

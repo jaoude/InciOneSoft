@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using InciOneSoft.DAL.DBContext;
 using InciOneSoft.DAL.Entities;
+using Microsoft.VisualBasic.FileIO;
+using System.IO;
 
 namespace InciOneSoft.DAL.Repositories
 {
-    public class FileInfoRepository : Repository<FileInfo>, IFileInfoRepository
+    public class FileInfoRepository : Repository<Entities.FileInfo>, IFileInfoRepository
     {
         //private InciOneSoftDbContext _context;
 
@@ -18,20 +20,6 @@ namespace InciOneSoft.DAL.Repositories
         {
         }
 
-
-        //public async Task<Person> GetPersonAsync(Guid id, CancellationToken ct)
-        //{
-        //    return await _db.Set<Person>().FirstOrDefaultAsync(ct);
-        //}
-
-        //public async Task<IEnumerable<Person>> GetPersonsAsync(CancellationToken ct)
-        //{
-        //    return await _db.Set<Person>().ToListAsync(ct);
-        //}
-
-        //public void CreatePerson(Person personEntity)
-        //{
-        //     _db.Set<Person>().Add(personEntity);
-        //}
+        
     }
 }
